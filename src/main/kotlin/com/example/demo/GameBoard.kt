@@ -8,42 +8,59 @@ class GameBoard (var size: Int) {
     }
 
     fun generateWinConditions(size: Int): List<List<Int>> {
-        val winConditions: MutableList<List<Int>> = mutableListOf()
-        val condition: MutableList<Int> = mutableListOf()
         val lastSpace = size * size
         val range: List<Int> = (1..lastSpace).toList()
+        val winConditions: MutableList<List<Int>> = mutableListOf()
 
-//        first n conditions (rows):
+        generateRowWinConditions(size, range, winConditions)
+        generateColWinCondtions(size, range, winConditions)
+        generateCross1WinCondtion(size, range, winConditions)
+        generateCross2WinCondition(size, range, winConditions)
+
+        return winConditions
+    }
+
+    fun generateRowWinConditions(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
         for (i in 0 until size) {
+            val conditions: MutableList<Int> = mutableListOf()
             for (j in 0 until size) {
-                condition += range[j + (i * size)]
+                conditions += range[j + (i * size)]
             }
-            winConditions.add(condition.toList())
-            condition.clear()
+            addConditionToWinConditions(winConditions, conditions)
         }
-//        next n conditions (cols):
+    }
+
+    fun generateColWinCondtions(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
         for (i in 0 until size) {
+            val conditions = mutableListOf<Int>()
             for (j in 0 until size) {
                 val index = (j * size) + i
-                condition += range[index]
+                conditions += range[index]
             }
-            winConditions.add(condition.toList())
-            condition.clear()
+            addConditionToWinConditions(winConditions, conditions)
         }
+    }
 
+    fun generateCross1WinCondtion(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
+        val condition = mutableListOf<Int>()
         for (i in 0 until size) {
             val index = i * (size + 1)
             condition += range[index]
         }
-        winConditions.add(condition.toList())
-        condition.clear()
+        addConditionToWinConditions(winConditions, condition)
+    }
 
+    fun generateCross2WinCondition(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
+        val condition = mutableListOf<Int>()
         for (i in 0 until size) {
             val index = (i * (size - 1)) + (size - 1)
             condition += range[index]
         }
-        winConditions.add(condition.toList())
+        addConditionToWinConditions(winConditions, condition)
+    }
 
-        return winConditions
+    fun addConditionToWinConditions(winConditions: MutableList<List<Int>>, conditions: MutableList<Int>) {
+        winConditions.add(conditions.toList())
+        conditions.clear()
     }
 }
