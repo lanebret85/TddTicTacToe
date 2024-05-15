@@ -9,7 +9,7 @@ class GameBoardPresenterTest {
     @Test
     fun testPrintBoard() {
         val gameBoard = GameBoard(3)
-        val presenter = GameBoardPresenter(gameBoard)
+        val presenter = GameBoardPresenter()
 
         Assertions.assertNotNull(presenter.printBoard(gameBoard))
         Assertions.assertTrue(presenter.printBoard(gameBoard).length == (((gameBoard.size * 2) - 1) * ((gameBoard.size * 2) - 1) + ((gameBoard.size * 2) - 2)))
@@ -17,8 +17,7 @@ class GameBoardPresenterTest {
 
     @Test
     fun testValidPiecePlacement() {
-        val gameBoard = GameBoard(3)
-        val presenter = GameBoardPresenter(gameBoard)
+        val presenter = GameBoardPresenter()
         val input = 3
         val piecePlaced = presenter.placePiece(input)
 
@@ -27,8 +26,7 @@ class GameBoardPresenterTest {
 
     @Test
     fun testInvalidPiecePlacementTooBig() {
-        val gameBoard = GameBoard(3)
-        val presenter = GameBoardPresenter(gameBoard)
+        val presenter = GameBoardPresenter()
         val input = 12
         val piecePlaced = presenter.placePiece(input)
 
@@ -37,8 +35,7 @@ class GameBoardPresenterTest {
 
     @Test
     fun testInvalidPiecePlacementTooSmall() {
-        val gameBoard = GameBoard(3)
-        val presenter = GameBoardPresenter(gameBoard)
+        val presenter = GameBoardPresenter()
         val input = 0
         val piecePlaced = presenter.placePiece(input)
 

@@ -1,6 +1,6 @@
 package org.example.com.example.demo
 
-class GameBoardPresenter (gameBoard: GameBoard) {
+class GameBoardPresenter {
     fun printBoard(gameBoard: GameBoard): String {
         val boardArray = gameBoard.generateBoard(gameBoard.size)
         var prettyBoard = ""
