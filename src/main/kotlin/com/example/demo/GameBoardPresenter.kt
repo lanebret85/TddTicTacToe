@@ -3,30 +3,50 @@ package org.example.com.example.demo
 class GameBoardPresenter {
     fun printBoard(gameBoard: GameBoard): String {
         val boardArray = gameBoard.generateBoard(gameBoard.size)
-        var prettyBoard = ""
+        val prettyBoard = StringBuilder()
         var innerIndex = 0
         for ((outerIndex, i) in boardArray.withIndex()) {
             for (j in i) {
-                prettyBoard += j
+                addSpace(prettyBoard, j)
                 if (innerIndex + 1 < gameBoard.size) {
-                    prettyBoard += "|"
+                    addColDivider(prettyBoard)
                 } else if (outerIndex + 1 < gameBoard.size) {
-                    prettyBoard += "\n"
+                    addLineBreak(prettyBoard)
                 }
                 innerIndex ++
             }
             if (outerIndex + 1 < gameBoard.size) {
                 for (i in 1..gameBoard.size) {
-                    prettyBoard += "-"
+                    addRowDivider(prettyBoard)
                     if (i < gameBoard.size) {
-                        prettyBoard += "+"
+                        addIntersection(prettyBoard)
                     }
                 }
-                prettyBoard += "\n"
+                addLineBreak(prettyBoard)
             }
             innerIndex = 0
         }
-        return prettyBoard
+        return prettyBoard.toString()
+    }
+
+    fun addSpace(gameBoardRepresentation: StringBuilder, space: String) {
+        gameBoardRepresentation.append(space)
+    }
+
+    fun addColDivider(gameBoardRepresentation: StringBuilder) {
+        gameBoardRepresentation.append("|")
+    }
+
+    fun addLineBreak(gameBoardRepresentation: StringBuilder) {
+        gameBoardRepresentation.append("\n")
+    }
+
+    fun addRowDivider(gameBoardRepresentation: StringBuilder) {
+        gameBoardRepresentation.append("-")
+    }
+
+    fun addIntersection(gameBoardRepresentation: StringBuilder) {
+        gameBoardRepresentation.append("+")
     }
 
     fun placePiece(input: Int): String {
