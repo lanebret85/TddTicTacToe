@@ -29,23 +29,23 @@ class GameBoardPresenter {
         return prettyBoard.toString()
     }
 
-    fun addSpace(gameBoardRepresentation: StringBuilder, space: String) {
+    private fun addSpace(gameBoardRepresentation: StringBuilder, space: String) {
         gameBoardRepresentation.append(space)
     }
 
-    fun addColDivider(gameBoardRepresentation: StringBuilder) {
+    private fun addColDivider(gameBoardRepresentation: StringBuilder) {
         gameBoardRepresentation.append("|")
     }
 
-    fun addLineBreak(gameBoardRepresentation: StringBuilder) {
+    private fun addLineBreak(gameBoardRepresentation: StringBuilder) {
         gameBoardRepresentation.append("\n")
     }
 
-    fun addRowDivider(gameBoardRepresentation: StringBuilder) {
+    private fun addRowDivider(gameBoardRepresentation: StringBuilder) {
         gameBoardRepresentation.append("-")
     }
 
-    fun addIntersection(gameBoardRepresentation: StringBuilder) {
+    private fun addIntersection(gameBoardRepresentation: StringBuilder) {
         gameBoardRepresentation.append("+")
     }
 
@@ -57,10 +57,13 @@ class GameBoardPresenter {
         }
     }
 
-    fun updateBoard(): Int {
+    fun placePiece(): Int {
+
+    }
+
+    fun updateBoard() {
 //        placeholder: changes the physical space on the board
 //        returns the integer representation of that space
-        return 0
     }
 
     fun assignSpaceToPlayer() {
