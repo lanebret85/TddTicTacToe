@@ -20,7 +20,7 @@ class GameBoard (var size: Int) {
         return winConditions
     }
 
-    fun generateRowWinConditions(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
+    private fun generateRowWinConditions(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
         for (i in 0 until size) {
             val conditions: MutableList<Int> = mutableListOf()
             for (j in 0 until size) {
@@ -30,7 +30,7 @@ class GameBoard (var size: Int) {
         }
     }
 
-    fun generateColWinCondtions(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
+    private fun generateColWinCondtions(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
         for (i in 0 until size) {
             val conditions = mutableListOf<Int>()
             for (j in 0 until size) {
@@ -41,7 +41,7 @@ class GameBoard (var size: Int) {
         }
     }
 
-    fun generateCross1WinCondtion(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
+    private fun generateCross1WinCondtion(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
         val condition = mutableListOf<Int>()
         for (i in 0 until size) {
             val index = i * (size + 1)
@@ -50,7 +50,7 @@ class GameBoard (var size: Int) {
         addConditionToWinConditions(winConditions, condition)
     }
 
-    fun generateCross2WinCondition(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
+    private fun generateCross2WinCondition(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
         val condition = mutableListOf<Int>()
         for (i in 0 until size) {
             val index = (i * (size - 1)) + (size - 1)
@@ -59,7 +59,7 @@ class GameBoard (var size: Int) {
         addConditionToWinConditions(winConditions, condition)
     }
 
-    fun addConditionToWinConditions(winConditions: MutableList<List<Int>>, conditions: MutableList<Int>) {
+    private fun addConditionToWinConditions(winConditions: MutableList<List<Int>>, conditions: MutableList<Int>) {
         winConditions.add(conditions.toList())
         conditions.clear()
     }
