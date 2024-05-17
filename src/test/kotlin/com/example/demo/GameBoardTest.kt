@@ -4,18 +4,16 @@ import org.example.com.example.demo.GameBoard
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-// take in n number of rows/cols - done
-// generate win conditions for n number of rows/cols - done
+// still to do:
 // give player option to play again after any result (win, lose, or tie)
 // play on "hard mode" where computer is unbeatable (find algorithm)
-// be specific in naming, including assigning name for symbols that make up the board with a pretty print UI class
-// be able to place a piece 'X' or 'O'
+// be able to choose which piece you play with as the user ('X' or 'O')
 
 class GameBoardTest {
     @Test
     fun testCreateBoardWithSize3() {
         val gameBoard = GameBoard(3)
-        val generatedBoard = gameBoard.generateBoard(gameBoard.size)
+        val generatedBoard = gameBoard.generateBoard()
         val checkBoard: Array<Array<String>> = arrayOf(
             arrayOf(" ", " ", " "),
             arrayOf(" ", " ", " "),
@@ -28,7 +26,7 @@ class GameBoardTest {
     @Test
     fun testCreateBoardWithSize5() {
         val gameBoard = GameBoard(5)
-        val generatedBoard = gameBoard.generateBoard(gameBoard.size)
+        val generatedBoard = gameBoard.generateBoard()
         val checkBoard: Array<Array<String>> = arrayOf(
             arrayOf(" ", " ", " ", " ", " "),
             arrayOf(" ", " ", " ", " ", " "),
@@ -38,6 +36,27 @@ class GameBoardTest {
         )
 
         Assertions.assertTrue(checkBoard contentDeepEquals generatedBoard)
+    }
+
+    @Test
+    fun testUpdateBoard() {
+        val gameBoard = GameBoard(3)
+        val token = StringBuilder("X")
+        val space = 1
+        val updatedBoard = gameBoard.updateBoard(token, space)
+
+        Assertions.assertTrue(updatedBoard[0][0] == token.toString())
+    }
+
+    @Test
+    fun testAssignSpaceToPlayerUser() {
+        val board = GameBoard(3)
+        val playerSelection = 1
+        val userPositions = mutableListOf<Int>()
+
+        board.assignSpaceToPlayer(playerSelection, userPositions)
+
+        Assertions.assertTrue(userPositions.contains(playerSelection))
     }
 
     @Test

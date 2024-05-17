@@ -1,10 +1,23 @@
 package org.example.com.example.demo
 
-class GameBoard (var size: Int) {
-    fun generateBoard(size: Int): Array<Array<String>> {
-        val board: Array<Array<String>> = Array(size) { Array(size) { " " } }
+class GameBoard (val size: Int) {
+    private var boardArray: Array<Array<String>> = Array(size) { Array(size) { " " } }
 
-        return board
+    fun generateBoard(): Array<Array<String>> {
+        return boardArray
+    }
+
+    fun updateBoard(token: StringBuilder, space: Int): Array<Array<String>> {
+        val boardSize = size
+        val outerIndex = (space - 1) / boardSize
+        val innerIndex = (space - 1) - (outerIndex * boardSize)
+        boardArray[outerIndex][innerIndex] = token.toString()
+
+        return boardArray
+    }
+
+    fun assignSpaceToPlayer(space: Int, playerPositions: MutableList<Int>) {
+        playerPositions.add(space)
     }
 
     fun generateWinConditions(size: Int): List<List<Int>> {
@@ -13,14 +26,14 @@ class GameBoard (var size: Int) {
         val winConditions: MutableList<List<Int>> = mutableListOf()
 
         generateRowWinConditions(size, range, winConditions)
-        generateColWinCondtions(size, range, winConditions)
-        generateCross1WinCondtion(size, range, winConditions)
+        generateColWinConditions(size, range, winConditions)
+        generateCross1WinCondition(size, range, winConditions)
         generateCross2WinCondition(size, range, winConditions)
 
         return winConditions
     }
 
-    fun generateRowWinConditions(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
+    private fun generateRowWinConditions(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
         for (i in 0 until size) {
             val conditions: MutableList<Int> = mutableListOf()
             for (j in 0 until size) {
@@ -30,7 +43,7 @@ class GameBoard (var size: Int) {
         }
     }
 
-    fun generateColWinCondtions(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
+    private fun generateColWinConditions(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
         for (i in 0 until size) {
             val conditions = mutableListOf<Int>()
             for (j in 0 until size) {
@@ -41,7 +54,7 @@ class GameBoard (var size: Int) {
         }
     }
 
-    fun generateCross1WinCondtion(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
+    private fun generateCross1WinCondition(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
         val condition = mutableListOf<Int>()
         for (i in 0 until size) {
             val index = i * (size + 1)
@@ -50,7 +63,7 @@ class GameBoard (var size: Int) {
         addConditionToWinConditions(winConditions, condition)
     }
 
-    fun generateCross2WinCondition(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
+    private fun generateCross2WinCondition(size: Int, range: List<Int>, winConditions: MutableList<List<Int>>) {
         val condition = mutableListOf<Int>()
         for (i in 0 until size) {
             val index = (i * (size - 1)) + (size - 1)
@@ -59,7 +72,7 @@ class GameBoard (var size: Int) {
         addConditionToWinConditions(winConditions, condition)
     }
 
-    fun addConditionToWinConditions(winConditions: MutableList<List<Int>>, conditions: MutableList<Int>) {
+    private fun addConditionToWinConditions(winConditions: MutableList<List<Int>>, conditions: MutableList<Int>) {
         winConditions.add(conditions.toList())
         conditions.clear()
     }
