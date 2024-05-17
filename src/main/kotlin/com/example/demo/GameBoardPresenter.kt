@@ -1,8 +1,8 @@
 package org.example.com.example.demo
 
 class GameBoardPresenter {
-    fun printBoard(gameBoard: GameBoard) {
-        println(boardToString(gameBoard.generateBoard(gameBoard.size)))
+    fun printBoard(gameBoard: Array<Array<String>>) {
+        println(boardToString(gameBoard))
     }
 
     fun boardToString(gameBoard: Array<Array<String>>): String {
@@ -16,7 +16,7 @@ class GameBoardPresenter {
                 } else if (outerIndex + 1 < gameBoard.size) {
                     addLineBreak(prettyBoard)
                 }
-                innerIndex ++
+                innerIndex++
             }
             if (outerIndex + 1 < gameBoard.size) {
                 for (i in 1..gameBoard.size) {
@@ -52,32 +52,11 @@ class GameBoardPresenter {
         gameBoardRepresentation.append("+")
     }
 
-    fun piecePlacedSuccessfully(input: Int): Boolean {
-        return input in 1..9
-    }
-
-    fun userInputs(value: Int): Int {
-        return value
-    }
-
     fun printPrompt() {
         println(promptUser())
     }
 
     fun promptUser(): String {
         return "Select a space to place your piece: "
-    }
-
-    fun updateBoard(gameBoard: Array<Array<String>>, token: StringBuilder, space: Int): String {
-        val boardSize = gameBoard.size
-        val outerIndex = (space - 1) / boardSize
-        val innerIndex = (space - 1) - (outerIndex * boardSize)
-        gameBoard[outerIndex][innerIndex] = token.toString()
-
-        return boardToString(gameBoard)
-    }
-
-    fun assignSpaceToPlayer() {
-//        placeholder: adds the integer return value from updateBoard to the correct player's list of spaces chose
     }
 }
