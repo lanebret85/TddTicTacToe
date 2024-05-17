@@ -13,4 +13,8 @@ class Rules {
             }
         }
     }
+
+    fun piecePlacedSuccessfully(input: Int): Boolean {
+        return input in 1..9
+    }
 }
