@@ -1,6 +1,6 @@
 package com.example.demo
 
-import org.example.com.example.demo.GameBoardPresenter
+import org.example.com.example.demo.GameBoard
 import org.example.com.example.demo.Rules
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -9,7 +9,7 @@ class RulesTest {
     @Test
     fun testSwitchTokenToX() {
         val rules = Rules()
-        val player = "user"
+        val player = "player"
         val token = StringBuilder()
 
         rules.switchTokenTo(player, token)
@@ -30,7 +30,6 @@ class RulesTest {
 
     @Test
     fun testValidPiecePlacement() {
-        val presenter = GameBoardPresenter()
         val rules = Rules()
         val input = 3
         val piecePlaced = rules.piecePlacedSuccessfully(input)
@@ -40,7 +39,6 @@ class RulesTest {
 
     @Test
     fun testInvalidPiecePlacementTooBig() {
-        val presenter = GameBoardPresenter()
         val rules = Rules()
         val input = 12
         val piecePlaced = rules.piecePlacedSuccessfully(input)
@@ -50,11 +48,28 @@ class RulesTest {
 
     @Test
     fun testInvalidPiecePlacementTooSmall() {
-        val presenter = GameBoardPresenter()
         val rules = Rules()
         val input = 0
         val piecePlaced = rules.piecePlacedSuccessfully(input)
 
         Assertions.assertFalse(piecePlaced)
+    }
+
+    @Test
+    fun testIsWinnerTrue() {
+        val gameBoard = GameBoard(3)
+        val rules = Rules()
+        val playerPositions = listOf(1, 2, 3)
+
+        Assertions.assertTrue(rules.isWinner(gameBoard, playerPositions))
+    }
+
+    @Test
+    fun testIsWinnerFalse() {
+        val gameBoard = GameBoard(3)
+        val rules = Rules()
+        val playerPositions = listOf(1, 2, 4)
+
+        Assertions.assertFalse(rules.isWinner(gameBoard, playerPositions))
     }
 }
