@@ -54,7 +54,7 @@ class GameBoardTest {
         val playerSelection = 1
         val userPositions = mutableListOf<Int>()
 
-        board.assignSpaceToPlayer(playerSelection, userPositions)
+        board.assignSpaceToUser(playerSelection, userPositions)
 
         Assertions.assertTrue(userPositions.contains(playerSelection))
     }

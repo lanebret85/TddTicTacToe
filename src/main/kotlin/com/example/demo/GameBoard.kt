@@ -16,8 +16,8 @@ class GameBoard (val size: Int) {
         return boardArray
     }
 
-    fun assignSpaceToPlayer(space: Int, playerPositions: MutableList<Int>) {
-        playerPositions.add(space)
+    fun assignSpaceToUser(space: Int, userPositions: MutableList<Int>) {
+        userPositions.add(space)
     }
 
     fun generateWinConditions(size: Int): List<List<Int>> {

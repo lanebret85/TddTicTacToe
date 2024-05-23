@@ -19,7 +19,7 @@ fun main() {
     rules.switchTokenTo("user", token)
     playerPosition = scanner.nextInt()
     if (rules.piecePlacedSuccessfully(playerPosition)) {
-        board.assignSpaceToPlayer(playerPosition, playerPositions)
+        board.assignSpaceToUser(playerPosition, playerPositions)
         presenter.printBoard(board.updateBoard(token, playerPosition))
     }
 }
