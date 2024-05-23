@@ -72,4 +72,24 @@ class RulesTest {
 
         Assertions.assertFalse(rules.isWinner(gameBoard, playerPositions))
     }
+
+    @Test
+    fun testIsDrawFalse() {
+        val gameBoard = GameBoard(3)
+        val rules = Rules()
+        val playerPositions = listOf(2, 3)
+        val cpuPositions = listOf(4, 5, 7)
+
+        Assertions.assertFalse(rules.isDraw(gameBoard, playerPositions, cpuPositions))
+    }
+
+    @Test
+    fun testIsDrawTrue() {
+        val gameBoard = GameBoard(3)
+        val rules = Rules()
+        val playerPositions = listOf(1, 3, 4, 8, 9)
+        val cpuPositions = listOf(2, 5, 6, 7)
+
+        Assertions.assertTrue(rules.isDraw(gameBoard, playerPositions, cpuPositions))
+    }
 }
