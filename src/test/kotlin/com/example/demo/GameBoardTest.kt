@@ -81,7 +81,7 @@ class GameBoardTest {
             cross2
         )
 
-        Assertions.assertTrue(n3WinConditions == gameBoard.generateWinConditions(gameBoard.size))
+        Assertions.assertTrue(n3WinConditions == gameBoard.generateWinConditions())
     }
 
     @Test
@@ -114,6 +114,6 @@ class GameBoardTest {
             cross2
         )
 
-        Assertions.assertTrue(n5WinConditions == gameBoard.generateWinConditions(gameBoard.size))
+        Assertions.assertTrue(n5WinConditions == gameBoard.generateWinConditions())
     }
 }
