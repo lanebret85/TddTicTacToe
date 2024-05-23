@@ -26,4 +26,8 @@ class Rules {
         }
         return false
     }
+
+    fun isDraw(gameBoard: GameBoard, playerConditions: List<Int>, cpuPositions: List<Int>): Boolean {
+        return playerConditions.size + cpuPositions.size == gameBoard.size * gameBoard.size
+    }
 }
