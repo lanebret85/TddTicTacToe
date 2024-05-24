@@ -76,4 +76,16 @@ class GameBoard (val size: Int) {
         winConditions.add(conditions.toList())
         conditions.clear()
     }
+
+    fun evaluate(gameBoard: GameBoard, user: String, rules: Rules): Int {
+        when (user) {
+            "player" -> if (rules.isWinner(gameBoard, user)) {
+                return +1
+            }
+            "cpu" -> if (rules.isWinner(gameBoard, user)) {
+                return -1
+            }
+        }
+        return 0
+    }
 }
