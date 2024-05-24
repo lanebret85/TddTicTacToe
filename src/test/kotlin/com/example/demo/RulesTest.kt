@@ -59,37 +59,64 @@ class RulesTest {
     fun testIsWinnerTrue() {
         val gameBoard = GameBoard(3)
         val rules = Rules()
-        val playerPositions = listOf(1, 2, 3)
+        val user = "player"
+        val playerPositions = rules.playerPositions
 
-        Assertions.assertTrue(rules.isWinner(gameBoard, playerPositions))
+        gameBoard.assignSpaceToUser(1, playerPositions)
+        gameBoard.assignSpaceToUser(2, playerPositions)
+        gameBoard.assignSpaceToUser(3, playerPositions)
+
+        Assertions.assertTrue(rules.isWinner(gameBoard, user))
     }
 
     @Test
     fun testIsWinnerFalse() {
         val gameBoard = GameBoard(3)
         val rules = Rules()
-        val playerPositions = listOf(1, 2, 4)
+        val user = "player"
+        val playerPositions = rules.playerPositions
 
-        Assertions.assertFalse(rules.isWinner(gameBoard, playerPositions))
+        gameBoard.assignSpaceToUser(1, playerPositions)
+        gameBoard.assignSpaceToUser(2, playerPositions)
+        gameBoard.assignSpaceToUser(4, playerPositions)
+
+        Assertions.assertFalse(rules.isWinner(gameBoard, user))
     }
 
     @Test
     fun testIsDrawFalse() {
         val gameBoard = GameBoard(3)
         val rules = Rules()
-        val playerPositions = listOf(2, 3)
-        val cpuPositions = listOf(4, 5, 7)
+        val playerPositions = rules.playerPositions
+        val cpuPositions = rules.cpuPositions
 
-        Assertions.assertFalse(rules.isDraw(gameBoard, playerPositions, cpuPositions))
+        gameBoard.assignSpaceToUser(1, playerPositions)
+        gameBoard.assignSpaceToUser(4, cpuPositions)
+        gameBoard.assignSpaceToUser(2, playerPositions)
+        gameBoard.assignSpaceToUser(5, cpuPositions)
+        gameBoard.assignSpaceToUser(9, playerPositions)
+        gameBoard.assignSpaceToUser(6, cpuPositions)
+
+        Assertions.assertFalse(rules.isDraw(gameBoard))
     }
 
     @Test
     fun testIsDrawTrue() {
         val gameBoard = GameBoard(3)
         val rules = Rules()
-        val playerPositions = listOf(1, 3, 4, 8, 9)
-        val cpuPositions = listOf(2, 5, 6, 7)
+        val playerPositions = rules.playerPositions
+        val cpuPositions = rules.cpuPositions
 
-        Assertions.assertTrue(rules.isDraw(gameBoard, playerPositions, cpuPositions))
+        gameBoard.assignSpaceToUser(1, playerPositions)
+        gameBoard.assignSpaceToUser(2, cpuPositions)
+        gameBoard.assignSpaceToUser(3, playerPositions)
+        gameBoard.assignSpaceToUser(5, cpuPositions)
+        gameBoard.assignSpaceToUser(4, playerPositions)
+        gameBoard.assignSpaceToUser(6, cpuPositions)
+        gameBoard.assignSpaceToUser(8, playerPositions)
+        gameBoard.assignSpaceToUser(7, cpuPositions)
+        gameBoard.assignSpaceToUser(9, playerPositions)
+
+        Assertions.assertTrue(rules.isDraw(gameBoard))
     }
 }
