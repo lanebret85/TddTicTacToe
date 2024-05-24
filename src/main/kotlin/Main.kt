@@ -12,14 +12,13 @@ fun main() {
     val token = StringBuilder()
     val scanner = Scanner(System.`in`)
     var playerPosition = 0
-    val playerPositions = mutableListOf<Int>()
 
     presenter.printBoard(board.generateBoard())
     presenter.printPrompt()
     rules.switchTokenTo("user", token)
     playerPosition = scanner.nextInt()
     if (rules.piecePlacedSuccessfully(playerPosition)) {
-        board.assignSpaceToUser(playerPosition, playerPositions)
+        board.assignSpaceToUser(playerPosition, rules.playerPositions)
         presenter.printBoard(board.updateBoard(token, playerPosition))
     }
 }
