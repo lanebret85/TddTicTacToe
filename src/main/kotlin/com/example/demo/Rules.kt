@@ -1,6 +1,9 @@
 package org.example.com.example.demo
 
 class Rules {
+    val playerPositions = mutableListOf<Int>()
+    val cpuPositions = mutableListOf<Int>()
+
     fun switchTokenTo(user: String, token: StringBuilder) {
         when (user) {
             "player" -> {
@@ -18,16 +21,21 @@ class Rules {
         return input in 1..9
     }
 
-    fun isWinner(gameBoard: GameBoard, userConditions: List<Int>): Boolean {
+    fun isWinner(gameBoard: GameBoard, user: String): Boolean {
         for(condition in gameBoard.generateWinConditions()) {
-            if (userConditions.containsAll(condition)) {
-                return true
+            when (user) {
+                "player" -> if (playerPositions.containsAll(condition)) {
+                    return true
+                }
+                "cpu" -> if (cpuPositions.containsAll(condition)) {
+                    return true
+                }
             }
         }
         return false
     }
 
-    fun isDraw(gameBoard: GameBoard, playerConditions: List<Int>, cpuPositions: List<Int>): Boolean {
-        return playerConditions.size + cpuPositions.size == gameBoard.size * gameBoard.size
+    fun isDraw(gameBoard: GameBoard): Boolean {
+        return playerPositions.size + cpuPositions.size == gameBoard.size * gameBoard.size
     }
 }
