@@ -1,6 +1,7 @@
 package com.example.demo
 
 import org.example.com.example.demo.GameBoard
+import org.example.com.example.demo.Rules
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -115,5 +116,71 @@ class GameBoardTest {
         )
 
         Assertions.assertTrue(n5WinConditions == gameBoard.generateWinConditions())
+    }
+
+    @Test
+    fun testEvaluatePlayerWinner() {
+        val gameBoard = GameBoard(3)
+        val rules = Rules()
+        val user = "player"
+        val playerPositions = rules.playerPositions
+        val cpuPositions = rules.cpuPositions
+
+        gameBoard.assignSpaceToUser(1, playerPositions)
+        gameBoard.assignSpaceToUser(4, cpuPositions)
+        gameBoard.assignSpaceToUser(2, playerPositions)
+        gameBoard.assignSpaceToUser(5, cpuPositions)
+        gameBoard.assignSpaceToUser(3, playerPositions)
+
+        Assertions.assertTrue(gameBoard.evaluate(gameBoard, user, rules) == 1)
+    }
+
+    @Test
+    fun testEvaluateCpuWinner() {
+        val gameBoard = GameBoard(3)
+        val rules = Rules()
+        val user = "cpu"
+        val playerPositions = rules.playerPositions
+        val cpuPositions = rules.cpuPositions
+
+        gameBoard.assignSpaceToUser(1, playerPositions)
+        gameBoard.assignSpaceToUser(4, cpuPositions)
+        gameBoard.assignSpaceToUser(2, playerPositions)
+        gameBoard.assignSpaceToUser(5, cpuPositions)
+        gameBoard.assignSpaceToUser(9, playerPositions)
+        gameBoard.assignSpaceToUser(6, cpuPositions)
+
+        Assertions.assertTrue(gameBoard.evaluate(gameBoard, user, rules) == -1)
+    }
+
+    @Test
+    fun testEvaluatePlayerNotWinner() {
+        val gameBoard = GameBoard(3)
+        val rules = Rules()
+        val user = "player"
+        val playerPositions = rules.playerPositions
+        val cpuPositions = rules.cpuPositions
+
+        gameBoard.assignSpaceToUser(1, playerPositions)
+        gameBoard.assignSpaceToUser(4, cpuPositions)
+        gameBoard.assignSpaceToUser(2, playerPositions)
+
+        Assertions.assertTrue(gameBoard.evaluate(gameBoard, user, rules) == 0)
+    }
+
+    @Test
+    fun testEvaluateCpuNotWinner() {
+        val gameBoard = GameBoard(3)
+        val rules = Rules()
+        val user = "cpu"
+        val playerPositions = rules.playerPositions
+        val cpuPositions = rules.cpuPositions
+
+        gameBoard.assignSpaceToUser(1, playerPositions)
+        gameBoard.assignSpaceToUser(4, cpuPositions)
+        gameBoard.assignSpaceToUser(2, playerPositions)
+        gameBoard.assignSpaceToUser(5, cpuPositions)
+
+        Assertions.assertTrue(gameBoard.evaluate(gameBoard, user, rules) == 0)
     }
 }
